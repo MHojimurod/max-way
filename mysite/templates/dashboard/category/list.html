@@ -1,0 +1,65 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Category List</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Category List</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                    <a href="{% url 'category_add' %}"><div class="btn btn-block btn-success">Add</div></a>
+                </div>
+              </div>
+
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>№</th>
+                      <th>Name</th>
+                      <th>Kombo</th>
+                      <th>Created_at</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for cat in categories %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ cat.name }}</td>
+                      <td>{{ cat.combo }}</td>
+                      <td>{{ cat.created_at }}</td>
+                      <td><a href="{% url 'category_edit' pk=cat.id %}"><div class="btn btn-block btn-primary">Edit</div></a></td>
+                      <td><a href="{% url 'category_delete' pk=cat.id %}"><div class="btn btn-block btn-danger">Delete</div></a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
