@@ -29,7 +29,23 @@ class Product(models.Model):
         db_table = "product"
 
 
+class User_bot(models.Model):
+    chat_id = models.PositiveIntegerField(blank=False,null=False)
+    first_name = models.CharField(max_length=128, blank=True, null=True)
+    last_name = models.CharField(max_length=128, blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    created_at = models.CharField(max_length=128, blank=False, null=False)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        db_table = "user_bot"
+
+
 class Order(models.Model):
+    user_bot = models.ForeignKey(User_bot,blank=True,null=True,on_delete=models.SET_NULL)
     products = models.JSONField(blank=False, null=False)
     status = models.IntegerField(blank=False, null=False, default=1)
     total_price = models.IntegerField(blank=False, null=False, default=0)
@@ -53,3 +69,6 @@ class User(models.Model):
 
     class Meta:
         db_table = "user"
+
+
+

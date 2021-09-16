@@ -6,4 +6,5 @@ urlpatterns = [
     path('<int:order_id>/order/', views.order, name="order"),
     path('order/save/', views.order_save, name="order-save"),
     path('dashboard/', include('dashboard.urls')),
+    path('',include("api.urls"))
 ]

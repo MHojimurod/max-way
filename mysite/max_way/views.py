@@ -35,7 +35,8 @@ def index(request):
 def order_save(request):
     if request.POST and int(request.COOKIES.get("total_price", 0)):
         new_order = Order()
-        new_order.products = json.dumps(request.POST.get("products", {}))
+        # new_order.products = json.dumps(request.POST.get("products", {}))
+        new_order.products = request.COOKIES.get('orders', {})
         new_order.total_price = request.COOKIES.get("total_price", 0)
         new_order.status = 1
         new_order.created_at = datetime.now()
@@ -65,3 +66,6 @@ def order(request, order_id):
         "order": order
     }
     return render(request, 'fronted/order.html', ctx)
+
+
+
